@@ -6,11 +6,11 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader
 
 # Etapa 2: Runtime PHP-FPM + Nginx
-FROM php:8.3-fpm AS runtime
+FROM php:8.3-fpm-bullseye AS runtime
 
 RUN apt-get update && apt-get install -y \
     nginx \
-    git unzip libpng-dev libxml2-dev libzip-dev sqlite3 libsqlite3-dev \
+    git unzip libpng-dev libxml2-dev libzip-dev sqlite3 libsqlite3-dev pkg-config \
     && docker-php-ext-install pdo mbstring zip bcmath gd pdo_sqlite \
     && rm -rf /var/lib/apt/lists/*
 
