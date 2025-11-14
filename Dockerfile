@@ -8,19 +8,26 @@ RUN composer install --no-dev --optimize-autoloader
 # Etapa 2: Runtime PHP-FPM + Nginx
 FROM php:8.3-fpm-bullseye AS runtime
 
+# Instalar dependências necessárias
 RUN apt-get update && apt-get install -y \
     nginx \
-    git unzip libpng-dev libxml2-dev libzip-dev sqlite3 libsqlite3-dev pkg-config \
+    git unzip libpng-dev libonig-dev libxml2-dev libzip-dev sqlite3 libsqlite3-dev pkg-config \
     && docker-php-ext-install pdo mbstring zip bcmath gd pdo_sqlite \
     && rm -rf /var/lib/apt/lists/*
 
+# Copiar código da etapa build
 WORKDIR /var/www/html
 COPY --from=build /app .
 
+# Permissões para Laravel e banco SQLite
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/database \
     && touch /var/www/html/database/database.sqlite
 
+# Copiar configuração do Nginx
 COPY ./docker/nginx.conf /etc/nginx/nginx.conf
 
+# Expor porta (Render usa $PORT, mas 80 funciona)
 EXPOSE 80
-CMD service nginx start && php-fpm
+
+# Comando de inicialização
+CMD ["sh", "-c", "service nginx start && php-fpm"]
