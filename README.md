@@ -28,6 +28,21 @@ touch database/database.sqlite
 sail up
 ```
 
+### Test Dockerfile production
+```sh
+docker build -t sandbox-laravel-turso .
+docker run -p 80:80 laravel-sanbox-turso
+```
+_stop container_
+```sh
+docker ps
+docker stop <CONTAINER_ID>
+```
+_remove container_
+```sh
+docker rm <CONTAINER_ID>
+```
+
 ```sh
 sail npm install
 sail npm run dev

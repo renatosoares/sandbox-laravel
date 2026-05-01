@@ -20,7 +20,7 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progre
 
 
 # Etapa 3: Runtime com PHP-FPM + Nginx
-FROM php:8.3-fpm-bullseye AS runtime
+FROM php:8.4-fpm-bullseye AS runtime
 
 # Instalar dependências do sistema e extensões PHP
 RUN apt-get update && apt-get install -y \
