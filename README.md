@@ -31,7 +31,7 @@ sail up
 ### Test Dockerfile production
 ```sh
 docker build -t sandbox-laravel-turso .
-docker run -p 80:80 laravel-sanbox-turso
+docker run -p 80:80 sandbox-laravel-turso
 ```
 _stop container_
 ```sh
@@ -41,6 +41,11 @@ docker stop <CONTAINER_ID>
 _remove container_
 ```sh
 docker rm <CONTAINER_ID>
+```
+
+_exec bash container_
+```sh
+docker exec -it <nome-ou-id> bash
 ```
 
 ```sh
