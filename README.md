@@ -30,8 +30,8 @@ sail up
 
 ### Test Dockerfile production
 ```sh
-docker build -t sandbox-laravel-turso .
-docker run -p 80:80 sandbox-laravel-turso
+docker build -t sandbox-laravel .
+docker run -p 80:80 sandbox-laravel
 ```
 _stop container_
 ```sh
